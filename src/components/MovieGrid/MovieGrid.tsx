@@ -16,7 +16,7 @@ export default function MovieGrid({ movies, onSelect }: MovieGridProps) {
           <div className={css.card}>
             <img
               className={css.image}
-              src={movie.poster_full || "../../../public/fallback.svg"}
+              src={movie.poster_full || "/fallback.svg"}
               alt={movie.title}
               loading="lazy"
             />

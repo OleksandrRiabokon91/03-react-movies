@@ -47,7 +47,7 @@ export default function MovieModal({ movie, onClose }: MovieModalProps) {
           &times;
         </button>
         <img
-          src={movie.backdrop_full || "../../../public/fallback.svg"}
+          src={movie.backdrop_full || "/fallback.svg"}
           alt={movie.title}
           className={css.image}
         />
