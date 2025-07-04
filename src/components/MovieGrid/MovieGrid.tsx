@@ -1,6 +1,5 @@
 import css from "./MovieGrid.module.css";
 import type { Movie } from "../../types/movie";
-// import { IMAGE_POSTER_BASE } from "../../types/movie";
 
 interface MovieGridProps {
   movies: Movie[];
