@@ -2,7 +2,6 @@ import { useEffect } from "react";
 import { createPortal } from "react-dom";
 import css from "./MovieModal.module.css";
 import type { Movie } from "../../types/movie";
-import { IMAGE_BACKDROP_BASE } from "../../types/movie";
 
 interface MovieModalProps {
   movie: Movie;
@@ -51,7 +50,7 @@ export default function MovieModal({ movie, onClose }: MovieModalProps) {
         <img
           src={
             movie.backdrop_path
-              ? IMAGE_BACKDROP_BASE + movie.backdrop_path
+              ? "https://image.tmdb.org/t/p/original" + movie.backdrop_path
               : "/fallback.svg"
           }
           alt={`Backdrop for ${movie.title}`}

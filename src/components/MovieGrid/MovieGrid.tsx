@@ -1,6 +1,6 @@
 import css from "./MovieGrid.module.css";
 import type { Movie } from "../../types/movie";
-import { IMAGE_POSTER_BASE } from "../../types/movie";
+// import { IMAGE_POSTER_BASE } from "../../types/movie";
 
 interface MovieGridProps {
   movies: Movie[];
@@ -19,7 +19,7 @@ export default function MovieGrid({ movies, onSelect }: MovieGridProps) {
               className={css.image}
               src={
                 movie.poster_path
-                  ? IMAGE_POSTER_BASE + movie.poster_path
+                  ? "https://image.tmdb.org/t/p/w500" + movie.poster_path
                   : "/fallback.svg"
               }
               alt={movie.title}
