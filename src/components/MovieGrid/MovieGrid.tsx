@@ -1,9 +1,10 @@
 import css from "./MovieGrid.module.css";
-import type { MovieWithImagesFull_URL } from "../../services/movieService";
+import type { Movie } from "../../types/movie";
+import { IMAGE_POSTER_BASE } from "../../types/movie";
 
 interface MovieGridProps {
-  movies: MovieWithImagesFull_URL[];
-  onSelect: (movie: MovieWithImagesFull_URL) => void;
+  movies: Movie[];
+  onSelect: (movie: Movie) => void;
 }
 
 export default function MovieGrid({ movies, onSelect }: MovieGridProps) {
@@ -16,7 +17,11 @@ export default function MovieGrid({ movies, onSelect }: MovieGridProps) {
           <div className={css.card}>
             <img
               className={css.image}
-              src={movie.poster_full || "/fallback.svg"}
+              src={
+                movie.poster_path
+                  ? IMAGE_POSTER_BASE + movie.poster_path
+                  : "/fallback.svg"
+              }
               alt={movie.title}
               loading="lazy"
             />

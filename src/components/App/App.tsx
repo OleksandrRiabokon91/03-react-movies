@@ -2,7 +2,7 @@ import css from "./App.module.css";
 import "modern-normalize";
 import SearchBar from "../SearchBar/SearchBar";
 import { useState } from "react";
-import type { MovieWithImagesFull_URL } from "../../services/movieService";
+import type { Movie } from "../../types/movie";
 import fetchMovies from "../../services/movieService";
 import { Toaster } from "react-hot-toast";
 import { toast } from "react-hot-toast";
@@ -12,27 +12,23 @@ import ErrorMessage from "../ErrorMessage/ErrorMessage";
 import MovieModal from "../MovieModal/MovieModal";
 
 export default function App() {
-  const [arrMovie, setArrMovie] = useState<MovieWithImagesFull_URL[]>([]);
-  const [, setQuery] = useState("");
+  const [movies, setMovies] = useState<Movie[]>([]);
   const [isLoading, setIsLoading] = useState(false);
   const [hasError, setHasError] = useState(false);
 
-  const [selectedMovie, setSelectedMovie] =
-    useState<MovieWithImagesFull_URL | null>(null);
+  const [selectedMovie, setSelectedMovie] = useState<Movie | null>(null);
 
   const handleQuerySubmit = async (searchQuery: string) => {
     setHasError(false);
     setIsLoading(true);
 
-    setQuery(searchQuery);
-
-    setArrMovie([]);
+    setMovies([]);
     try {
       const results = await fetchMovies(searchQuery);
       if (results.length === 0) {
         toast.error("No movies found for your request.");
       } else {
-        setArrMovie(results);
+        setMovies(results);
       }
     } catch {
       setHasError(true);
@@ -50,9 +46,9 @@ export default function App() {
         <Loader />
       ) : hasError ? (
         <ErrorMessage />
-      ) : arrMovie.length > 0 ? (
+      ) : movies.length > 0 ? (
         <MovieGrid
-          movies={arrMovie}
+          movies={movies}
           onSelect={(movie) => setSelectedMovie(movie)}
         />
       ) : null}

@@ -1,10 +1,11 @@
 import { useEffect } from "react";
 import { createPortal } from "react-dom";
 import css from "./MovieModal.module.css";
-import type { MovieWithImagesFull_URL } from "../../services/movieService";
+import type { Movie } from "../../types/movie";
+import { IMAGE_BACKDROP_BASE } from "../../types/movie";
 
 interface MovieModalProps {
-  movie: MovieWithImagesFull_URL;
+  movie: Movie;
   onClose: () => void;
 }
 
@@ -37,8 +38,9 @@ export default function MovieModal({ movie, onClose }: MovieModalProps) {
       onClick={handleBackdropClick}
       role="dialog"
       aria-modal="true"
+      aria-label={`Details about ${movie.title}`}
     >
-      <div className={css.modal}>
+      <div className={css.modal} role="document">
         <button
           className={css.closeButton}
           onClick={onClose}
@@ -47,8 +49,12 @@ export default function MovieModal({ movie, onClose }: MovieModalProps) {
           &times;
         </button>
         <img
-          src={movie.backdrop_full || "/fallback.svg"}
-          alt={movie.title}
+          src={
+            movie.backdrop_path
+              ? IMAGE_BACKDROP_BASE + movie.backdrop_path
+              : "/fallback.svg"
+          }
+          alt={`Backdrop for ${movie.title}`}
           className={css.image}
         />
         <div className={css.content}>
